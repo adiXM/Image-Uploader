@@ -58,14 +58,15 @@
 
 <?php
 
-if(empty($_FILES['fileup']['tmp_name'])) {
-  echo "<div class='alert alert-warning col-md-4'>
-  <strong>Warning!</strong> You should choose an image.
-</div>";
-}
-
-
-if(isset($_POST["submit"]) && !empty($_FILES['fileup']['tmp_name'])) {
+if(isset($_POST["submit"])) {
+	
+	
+	if(empty($_FILES['fileup']['tmp_name'])) {
+	  echo "<div class='alert alert-warning col-md-4'>
+	  <strong>Warning!</strong> You should choose an image.
+	</div>";
+		return;
+	}
 
   $target_dir = "uploads/";
   $target_file = $target_dir . basename($_FILES["fileup"]["name"]);
@@ -80,7 +81,7 @@ if(isset($_POST["submit"]) && !empty($_FILES['fileup']['tmp_name'])) {
   $url_img = $url_img.$new_target;
   $home = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
   $succes = "
-  <div class='col-md-4'>
+  <div class='col-md-4 col-sm-4'>
   <img class='img-responsive' src='$new_target'>
   </br>
 
